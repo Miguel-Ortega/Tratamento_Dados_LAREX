@@ -24,4 +24,4 @@ with coluna2:
     st.write('Este aplicativo foi feito por Miguel Ortega em seu tempo nem tão livre.')
 
 with coluna3:
-    st.image(Minerva,width= 200)
+    st.image(Minerva,width= 400)
