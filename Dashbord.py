@@ -9,7 +9,7 @@ st.set_page_config(layout= 'wide',page_icon= 'jabuti-05.png', page_title= 'Facil
 st.title('Tratamentos de Dados')
 
 Jabuti = Image.open('jabuti-05.png')
-Minerva = Image.open('MInerva.png')
+Minerva = Image.open('Minerva.png')
 
 coluna1,coluna2,coluna3 = st.columns([250,250,250])
 
