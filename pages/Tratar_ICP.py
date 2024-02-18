@@ -11,7 +11,7 @@ from docx import Document
 
 st.set_page_config(page_icon= 'jabuti-05.png', page_title= 'Facilitador')
 st.title('Bem-vindo ao tratamento de DRX!')
-icp_file = st.file_uploader(label = 'Selecione o arquivo Excel com os dados ICP:' type=['xlsx'])
+icp_file = st.file_uploader(label = 'Selecione o arquivo Excel com os dados ICP:', type=['xlsx'])
 
 if icp_file:
     icp = pd.read_excel(icp_file)
@@ -20,7 +20,7 @@ if icp_file:
     csv_buffer.seek(0)
     grafico = pd.read_csv(csv_buffer)
 
-word_file = st.file_uploader(label= 'Selecione o arquivo Word com os comprimentos de onda:'type=['docx'])
+word_file = st.file_uploader(label= 'Selecione o arquivo Word com os comprimentos de onda:', type=['docx'])
 
 if word_file:
     doc = Document(word_file)
