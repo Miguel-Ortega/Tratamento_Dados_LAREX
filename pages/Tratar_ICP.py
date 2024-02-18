@@ -10,9 +10,9 @@ from sklearn.metrics import r2_score
 from docx import Document
 
 st.set_page_config(page_icon= 'jabuti-05.png', page_title= 'Facilitador')
-
+st.title('Bem-vindo ao tratamento de DRX!')
 st.write('**Selecione o arquivo Excel com os dados ICP:**')
-icp_file = st.file_uploader(label="Faça upload do arquivo Excel", type=['xlsx'])
+icp_file = st.file_uploader(type=['xlsx'])
 
 if icp_file:
     icp = pd.read_excel(icp_file)
@@ -23,7 +23,7 @@ if icp_file:
 
 
 st.write('**Selecione o arquivo Word com os comprimentos de onda:**')
-word_file = st.file_uploader(label="Faça upload do arquivo Word", type=['docx'])
+word_file = st.file_uploader(type=['docx'])
 
 if word_file:
     doc = Document(word_file)
