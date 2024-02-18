@@ -16,7 +16,6 @@ st.write('Software desenvolvido por Miguel O.')
 coluna1,coluna2 = st.columns(2)
 
 with coluna1:
-
     Dados = st.file_uploader(label="Faça upload do arquivo com o Grafico", type=['csv'])
     if Dados:
         Dados = pd.read_csv(Dados)
