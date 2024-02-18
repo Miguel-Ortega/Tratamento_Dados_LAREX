@@ -7,8 +7,6 @@ import io
 
 st.set_page_config(page_icon= 'jabuti-05.png', page_title= 'Facilitador')
 
-
-local, arquivos = dados()
 st.title('Bem-vindo ao tratamento de DRX!')
 st.write('')
 st.write('Software desenvolvido por Miguel O.')
