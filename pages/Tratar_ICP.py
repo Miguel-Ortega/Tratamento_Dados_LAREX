@@ -10,7 +10,7 @@ from sklearn.metrics import r2_score
 from docx import Document
 
 st.set_page_config(page_icon= 'jabuti-05.png', page_title= 'Facilitador')
-st.title('Bem-vindo ao tratamento de DRX!')
+st.title('Bem-vindo ao tratamento de ICP!')
 icp_file = st.file_uploader(label = 'Selecione o arquivo Excel com os dados ICP:', type=['xlsx'])
 
 if icp_file:
