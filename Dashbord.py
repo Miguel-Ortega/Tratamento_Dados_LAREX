@@ -15,7 +15,7 @@ coluna1,coluna2,coluna3 = st.columns([250,250,250])
 
 
 with coluna1:
-    st.image(Jabuti,width = 200) 
+    st.image(Jabuti,width = 350) 
 
 with coluna2:
     st.write('Olá!!, Seja muito bem vindo!')
