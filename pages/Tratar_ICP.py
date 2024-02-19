@@ -128,6 +128,14 @@ def highlight_row(row):
     else:
         return ['color: green'] *len(row)
 
+PosiçãoNaCurva = []
+for index, row in PontoA.iterrows():
+    if row['Int'] < valor_referencia:
+        PosiçãoNaCurva.append('Abaixo')
+    elif row['Int'] > valor_maximo:
+        PosiçãoNaCurva.append('Acima')
+    else:
+        PosiçãoNaCurva.append('Dentro')
 
 PontoA['Int'] = (PontoA['Int']-b)/a
 
