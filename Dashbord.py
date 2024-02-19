@@ -19,7 +19,7 @@ with coluna1:
 
 with coluna2:
     st.write('Olá!!, Seja muito bem vindo!')
-    st.write('Ao lado esquerdo existe uma barra de seleção onde vc encontrará todos os softwares que te ajudam a economizar um tempinho do seu dia!')
+    st.write('Ao lado esquerdo existe uma barra de seleção onde você encontrará todos os softwares que te ajudam a economizar um tempinho do seu dia!')
     st.write('Podem aparecer algumas janelas de erro caso você ainda nao tenha subido os arquivos, apenas ignore!')
     st.write('Este aplicativo foi feito por Miguel Ortega em seu tempo nem tão livre.')
 
