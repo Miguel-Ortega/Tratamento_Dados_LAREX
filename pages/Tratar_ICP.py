@@ -117,12 +117,16 @@ b = model.intercept_
 
 valor_referencia = PontoP['Int'].min()
 FGX = PontoA['Int']
+valor_maximo = PontoP['Int'].max()
+
 
 def highlight_row(row):
     if row['Int'] < valor_referencia:
         return ['color: red'] * len(row)
-    elif row['Int'] > valor_referencia:
-        return ['color: green'] * len(row)
+    elif row['Int'] > valor_maximo:
+        return ['color: red'] * len(row)
+    else:
+        return ['color: green'] *len(row)
 
 
 PontoA['Int'] = (PontoA['Int']-b)/a
