@@ -163,6 +163,7 @@ unidade_de_medida = 'ppm'
 df_subset['Resultado'] += ' ' + unidade_de_medida
 df_subset['Int'] = FGX
 df_subset['Posição na Curva'] = PosiçãoNaCurva
+df_subset['Int'] = df_subset['Int'].round(2).astype(int)
 
 styled_df = df_subset.style.apply(highlight_row, axis=1)
 
