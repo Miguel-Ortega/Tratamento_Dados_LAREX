@@ -9,7 +9,6 @@ import xlsxwriter
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from docx import Document
-st.cache_data
 
 st.set_page_config(page_icon= 'jabuti-05.png', page_title= 'Facilitador')
 st.title('Bem-vindo ao tratamento de ICP!')
@@ -172,6 +171,7 @@ styled_df = df_subset.style.apply(highlight_row, axis=1)
 
 st.table(styled_df)
 
+st.cache_data
 def convert_df(df_subset):
     output = io.BytesIO()
     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
