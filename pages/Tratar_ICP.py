@@ -186,3 +186,4 @@ if Excel:
         file_name='Resultados_ICP.xlsx',
         mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
+st.cache_data.clear()
