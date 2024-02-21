@@ -9,13 +9,14 @@ import xlsxwriter
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from docx import Document
+st.cache_data
 
 st.set_page_config(page_icon= 'jabuti-05.png', page_title= 'Facilitador')
 st.title('Bem-vindo ao tratamento de ICP!')
 st.write('Software desenvolvido por Miguel O.')
 st.write('')
 icp_file = st.file_uploader(label = 'Selecione o arquivo Excel com os dados ICP:', type=['xlsx'])
-st.cache_data
+
 
 if icp_file:
     icp = pd.read_excel(icp_file)
