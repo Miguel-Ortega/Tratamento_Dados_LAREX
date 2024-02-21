@@ -14,6 +14,7 @@ st.title('Bem-vindo ao tratamento de ICP!')
 st.write('Software desenvolvido por Miguel O.')
 st.write('')
 icp_file = st.file_uploader(label = 'Selecione o arquivo Excel com os dados ICP:', type=['xlsx'])
+st.cache_data
 
 if icp_file:
     icp = pd.read_excel(icp_file)
@@ -168,3 +169,19 @@ df_subset['Int'] = df_subset['Int'].round(2).astype(int)
 styled_df = df_subset.style.apply(highlight_row, axis=1)
 
 st.table(styled_df)
+
+def convert_df(df_subset):
+    output = io.BytesIO()
+    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
+        df_subset.to_excel(writer, index=False, sheet_name='Sheet1')
+    return output.getvalue()
+
+Excel = convert_df(df_subset)
+
+if Excel:
+    st.download_button(
+        label="Baixar Resultados",
+        data=Excel,
+        file_name='Resultados_ICP.xlsx',
+        mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    )
