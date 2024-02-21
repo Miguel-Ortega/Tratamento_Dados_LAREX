@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import os
 import io
+import xlsxwriter
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from docx import Document
