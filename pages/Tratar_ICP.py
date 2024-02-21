@@ -9,8 +9,32 @@ import xlsxwriter
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 from docx import Document
+from functools import wraps
 
 st.set_page_config(page_icon= 'jabuti-05.png', page_title= 'Facilitador')
+
+class CacheDataAPI:
+    def __init__(self):
+        self._cached_data = {}
+
+    def __call__(self, func):
+        @wraps(func)
+        def wrapped_func(*args, **kwargs):
+            cache_key = hash((func, args, frozenset(kwargs.items())))
+            if cache_key not in self._cached_data:
+                self._cached_data[cache_key] = func(*args, **kwargs)
+            return self._cached_data[cache_key]
+        return wrapped_func
+
+    def clear(self):
+        self._cached_data = {}
+
+# Cria uma instância da API de cache de dados
+st.cache_data = CacheDataAPI()
+
+
+
+
 st.title('Bem-vindo ao tratamento de ICP!')
 st.write('Software desenvolvido por Miguel O.')
 st.write('')
@@ -171,7 +195,7 @@ styled_df = df_subset.style.apply(highlight_row, axis=1)
 
 st.table(styled_df)
 
-st.cache_data
+
 def convert_df(df_subset):
     output = io.BytesIO()
     with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
@@ -187,4 +211,3 @@ if Excel:
         file_name='Resultados_ICP.xlsx',
         mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
-st.cache_data.clear()
