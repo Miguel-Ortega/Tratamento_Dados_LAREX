@@ -50,12 +50,39 @@ if icp_file:
 
 word_file = st.file_uploader(label= 'Selecione o arquivo Word com os comprimentos de onda:', type=['docx'])
 
+def find_highlighted_cells(doc):
+    highlighted_cells = []
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                if cell.text.strip():  # Verifica se a célula não está vazia
+                    for paragraph in cell.paragraphs:
+                        for run in paragraph.runs:
+                            if run.font.highlight_color is not None:
+                                highlighted_cells.append(cell.text)
+    return highlighted_cells
+
 if word_file:
     doc = Document(word_file)
 
+highlighted_cells = find_highlighted_cells(doc)
+
+df_ana = pd.DataFrame(highlighted_cells)
+  
+dataframes_Color=[]
+for nome_coluna, dados_coluna in df_ana.items():
+    novo_df = pd.DataFrame({nome_coluna: dados_coluna})
+    novo_df = novo_df.dropna()
+    dataframes_Color.append(novo_df)
+for i, df in enumerate(dataframes_Color):
+    dataframes_Color[i] = df.reset_index(drop=True)
+df_ana = pd.concat(dataframes_Color, axis=1)
+df_ana = df_ana.replace(',', '.', regex=True)
+
+
 dados_tabelas = []
 # Aqui eu mexo no word
-
+marcacoes = []
 for tabela in doc.tables:
     dados_tabela = []
     for linha in tabela.rows:
@@ -69,6 +96,7 @@ for tabela in doc.tables:
 df_Word = pd.concat(dados_tabelas, ignore_index=True)
 df = df_Word.drop(columns= ['Ordem'])
 
+
 dataframes_modificados = []
 
 for nome_coluna, dados_coluna in df.items():
@@ -79,7 +107,16 @@ for i, df in enumerate(dataframes_modificados):
     dataframes_modificados[i] = df.reset_index(drop=True)
 df_final = pd.concat(dataframes_modificados, axis=1)
 df_final = df_final.replace(',', '.', regex=True)
-df_final
+
+def color_numbers(val):
+    color = 'color: green' if val in df_ana.values.flatten() else ''
+    return color
+
+# Aplicar a função ao DataFrame
+styled_df = df_final.style.applymap(color_numbers)
+
+# Exibir o DataFrame estilizado
+styled_df
 
 coluna_escolhida = st.selectbox('Defina o elemento:', df_final.columns)
 onda_escolhida = st.selectbox('Defina o comprimento de onda:', df_final[coluna_escolhida])
