@@ -42,26 +42,26 @@ y = df_dados[' yobs']
 plt.plot(x, y, color='black')
 df_picos = df_picos[df_picos['Chemical formula'] != 'Unknown']
 
-    categorias = df_picos['Chemical formula'].unique()
-    categoria_dict = {categoria: i+1 for i, categoria in enumerate(categorias)}
+categorias = df_picos['Chemical formula'].unique()
+categoria_dict = {categoria: i+1 for i, categoria in enumerate(categorias)}
 
-    df_picos['Numero'] = df_picos['Chemical formula'].map(categoria_dict)
-    scatter = plt.scatter(df_picos['2-theta(deg)'], df_picos['Height(cps)'], s=0, c=df_picos['Numero'], cmap='viridis')
+df_picos['Numero'] = df_picos['Chemical formula'].map(categoria_dict)
+scatter = plt.scatter(df_picos['2-theta(deg)'], df_picos['Height(cps)'], s=0, c=df_picos['Numero'], cmap='viridis')
 
-    for index, row in df_picos.iterrows():
-        plt.text(row['2-theta(deg)'], row['Height(cps)'], str(row['Numero']), ha='center', va='bottom')
+for index, row in df_picos.iterrows():
+    plt.text(row['2-theta(deg)'], row['Height(cps)'], str(row['Numero']), ha='center', va='bottom')
     
     
-    handles = []
-    labels = []
-    for categoria, numero in categoria_dict.items():
-        handles.append(plt.Line2D([0], [0], markerfacecolor=scatter.cmap(scatter.norm(numero))))
-        labels.append(f'{categoria} ({numero})')
+handles = []
+labels = []
+for categoria, numero in categoria_dict.items():
+    handles.append(plt.Line2D([0], [0], markerfacecolor=scatter.cmap(scatter.norm(numero))))
+    labels.append(f'{categoria} ({numero})')
 
-    plt.legend(handles, labels, title='Chemical Formula')
-    plt.title(st.text_input('Escreva o Título:'), loc='center')
-    plt.xlabel('twotheta')
-    plt.ylabel('yobs')
+plt.legend(handles, labels, title='Chemical Formula')
+plt.title(st.text_input('Escreva o Título:'), loc='center')
+plt.xlabel('twotheta')
+plt.ylabel('yobs')
 
 with coluna1:
     Xlim_inf = st.number_input('Limite inferior do eixo X:')
