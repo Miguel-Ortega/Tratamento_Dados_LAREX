@@ -61,9 +61,11 @@ if icp_file:
                                 if run.font.highlight_color is not None:
                                     highlighted_cells.append(cell.text)
         return highlighted_cells
+else:
+ st.warning("Por favor, faça o upload do excel.")
 
-    if word_file:
-        doc = Document(word_file)
+if word_file:
+    doc = Document(word_file)
 
     highlighted_cells = find_highlighted_cells(doc)
 
@@ -269,4 +271,4 @@ if icp_file:
             mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         )
 else:
- st.warning("Por favor, faça o upload de ambos os arquivos.")
+ st.warning("Por favor, faça o upload do word.")
