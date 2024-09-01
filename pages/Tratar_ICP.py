@@ -145,7 +145,8 @@ if icp_file:
     PontoA['Int'] = (PontoA['Int']) - int(PontoB['Int'])
 
     coluna1,coluna2 = st.columns(2)
-
+    x_original = PontoP['Soln Conc'].values
+    y_original = PontoP['Int'].values
     selected_rows = []
     with coluna2:
         for index, row in PontoP.iterrows():
@@ -168,7 +169,8 @@ if icp_file:
     right = left + width
     top = bottom + height
 
-    plt.scatter(x, y, color='black')
+    plt.scatter(x_original, y_original, alpha=0)
+    plt.scatter(x,y, color ='Black')
     fig.text(right, top, f'$R^2 = {r_quadrado:.5f}$', horizontalalignment='right', verticalalignment='bottom')
     plt.plot(x, y_prev, color='red')
 
@@ -206,21 +208,38 @@ if icp_file:
 
     df_subset = PontoA[['Nome da Amostra', 'Concentração']]
 
+    st.write('INSIRA OS FATORES DE DILUIÇÃO')
 
-    new_column_values = []
-    for index, row in df_subset.iterrows():
-        new_column_values = 1
-        temp_df = df_subset.copy()
-        temp_df['Fator de diluição'] = new_column_values
+    # Copia df_subset para temp_df para manipulação
+    temp_df = df_subset.copy()
 
+    # Extrai o número antes do 'x' na coluna 'Nome da Amostra'
+    temp_df['Fator de diluição'] = temp_df['Nome da Amostra'].str.extract(r'([\d.,]+)x', expand=False)
 
-    st.write('INSIRA OS FATORES DE DILUIÇÂO')
-    df_subset[['Nome da Amostra','Fator de diluição']] = st.data_editor(temp_df[['Nome da Amostra','Fator de diluição']], height=300, hide_index= True)
-    df_subset['Fator de diluição'].replace(',', '.', regex=True)
+    # Remove pontos como separadores de milhar
+    # Mantém os pontos decimais intactos
+    def clean_fator_diluicao(value):
+        # Se o valor é uma string, remova os pontos de milhar
+        if isinstance(value, str):
+            # Remove pontos de milhar e substitui vírgulas por pontos decimais
+            value = value.replace('.', '')  # Remove todos os pontos
+            value = value.replace(',', '.')  # Substitui vírgulas por pontos decimais
+        try:
+            return float(value)
+        except ValueError:
+            return 0  # Ou outra lógica para lidar com valores inválidos
 
-    Resultado = df_subset['Concentração'] * df_subset['Fator de diluição']
+    # Aplica a limpeza
+    temp_df['Fator de diluição'] = temp_df['Fator de diluição'].apply(clean_fator_diluicao)
 
-    df_subset['Resultado'] = Resultado
+    # Cria o editor de dados no Streamlit
+    df_subset = st.data_editor(temp_df[['Nome da Amostra', 'Fator de diluição']], height=300, hide_index=True)
+
+    # Adiciona a coluna 'Concentração' de volta ao DataFrame editado
+    df_subset['Concentração'] = PontoA['Concentração']
+
+    # Realiza a multiplicação
+    df_subset['Resultado'] = df_subset['Concentração'] * df_subset['Fator de diluição']
     df_subset['Resultado'] = df_subset['Resultado'].round(2).astype(str)
     unidade_de_medida = 'ppm' 
     df_subset['Resultado'] += ' ' + unidade_de_medida
@@ -229,6 +248,7 @@ if icp_file:
     df_subset['Int'] = df_subset['Int'].round(2).astype(int)
 
     styled_df = df_subset.style.apply(highlight_row, axis=1)
+    df_subset['Fator de diluição'] = df_subset['Fator de diluição'].map(lambda x: f"{x:.1f}")
 
     st.table(styled_df)
 
