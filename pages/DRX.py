@@ -61,7 +61,7 @@ def tratar_dados():
         df_picos['Height(cps)'] += 50
 
         # Adiciona 10 aos valores duplicados (exceto o primeiro), quando '2-theta(deg)' também é duplicado
-        df_picos.loc[df_picos.duplicated(subset=['Height(cps)', '2-theta(deg)'], keep='first'), 'Height(cps)'] += 100
+        df_picos.loc[df_picos.duplicated(subset=['Height(cps)', '2-theta(deg)'], keep='first'), 'Height(cps)'] += 50
 
         # Encontra as duplicatas novamente, depois da primeira modificação
         duplicates = df_picos.duplicated(subset=['Height(cps)', '2-theta(deg)'], keep='first')
