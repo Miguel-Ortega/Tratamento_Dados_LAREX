@@ -102,7 +102,6 @@ def tratar_dados():
         plt.ylim(0)
 
         st.pyplot(plt)
-        df_picos
     else:
         st.warning("Por favor, faça o upload de ambos os arquivos.")
 
