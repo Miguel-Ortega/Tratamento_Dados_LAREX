@@ -85,12 +85,19 @@ if abs_file:
 
     def extract_fator(sample_id):
         sample_id = str(sample_id)
-        match = pd.Series(sample_id).str.extract(r'([\d.,]+)([Xx])([Kk]?)', expand=True)
-        # Se houver 'K' ou 'k', multiplicar o valor extraído por 1000
+        # Extraímos o número seguido por 'X' ou 'x', e opcionalmente 'K' ou 'k'
+        match = pd.Series(sample_id).str.extract(r'([\d.,]+)([Kk]?)([Xx])', expand=True)
+        
         if match[1].str.contains('K|k', na=False).any():
             return float(match[0].str.replace(',', '.').iloc[0]) * 1000
+
+        if not match.empty and not match[0].isna().iloc[0]:
+            # Converte o número extraído para float, substituindo ',' por '.'
+            value = float(match[0].str.replace(',', '.').iloc[0])
+            return value
         else:
-            return float(match[0].str.replace(',', '.').iloc[0])
+            # Se não houver 'X' ou 'x', retornar 1
+            return 1
         
     def highlight_row(row):
         if row['Abs.'] < valor_minimo:
