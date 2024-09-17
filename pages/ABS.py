@@ -12,6 +12,7 @@ import xlsxwriter
 
 st.title('Bem-vindo ao tratamento de ABS!')
 st.write('Software desenvolvido por Miguel O.')
+st.write('Se necessário corrija o nome das amostras ou diluição')
 st.write('')
 abs_file = st.file_uploader(label = 'Selecione o arquivo txt com os dados do ABS:', type=['txt'])
 
