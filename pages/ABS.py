@@ -64,6 +64,7 @@ if abs_file:
 
     with coluna1:
         st.pyplot(plt)
+        st.write('Se necessário corrija o nome das amostras ou diluição')
 
     a = model.coef_[0]
     b = model.intercept_
@@ -112,7 +113,6 @@ if abs_file:
 
     Amostra.loc[:,'Concentração Final'] = Amostra['Fator de diluição']*Amostra['Concentração Calc.']
 
-    st.write('Se necessário corrija o nome das amostras ou diluição')
     df_subset = st.data_editor(Amostra[['Sample ID', 'Fator de diluição']], height=300, hide_index=True)
 
     df_subset['Concentração Calc.'] = Amostra['Concentração Calc.']
