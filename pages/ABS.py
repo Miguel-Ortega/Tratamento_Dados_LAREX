@@ -111,8 +111,8 @@ if abs_file:
     Amostra.loc[:,'Fator de diluição'] = Amostra['Sample ID'].apply(extract_fator)
 
     Amostra.loc[:,'Concentração Final'] = Amostra['Fator de diluição']*Amostra['Concentração Calc.']
-    
-    st.write('Se necessário corrija o nome das amostras ou diluição')
+
+    st.write('X')
     df_subset = st.data_editor(Amostra[['Sample ID', 'Fator de diluição']], height=300, hide_index=True)
 
     df_subset['Concentração Calc.'] = Amostra['Concentração Calc.']
