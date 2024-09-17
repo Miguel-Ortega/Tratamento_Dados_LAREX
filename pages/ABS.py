@@ -129,7 +129,7 @@ if abs_file:
         st.download_button(
             label="Baixar Resultados",
             data=Excel,
-            file_name='Resultados_ICP.xlsx',
+            file_name='Resultados_ABS.xlsx',
             mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         )
 
