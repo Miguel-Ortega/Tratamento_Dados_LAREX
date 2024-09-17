@@ -106,7 +106,13 @@ if abs_file:
 
     df_subset = st.data_editor(Amostra[['Sample ID', 'Fator de diluição']], height=300, hide_index=True)
 
-    df_subset[['Posição na Curva','Abs.','Concentração Final']] = Amostra[['Posição na Curva','Abs.','Concentração Final']]
+    df_subset['Concentração Calc.'] = Amostra['Concentração Calc.']
+
+    df_subset.loc[:,'Concentração Final'] = df_subset['Fator de diluição']*df_subset['Concentração Calc.']
+
+    df_subset[['Posição na Curva','Abs.']] = Amostra[['Posição na Curva','Abs.']]
+
+    df_subset = df_subset.drop(columns=['Concentração Calc.'])
 
     styled_df = df_subset[['Sample ID','Fator de diluição','Abs.','Concentração Final','Posição na Curva']].style\
         .apply(highlight_row, axis=1)\
@@ -116,8 +122,6 @@ if abs_file:
         'Concentração Final': "{:.2f}"
     })
     st.table(styled_df)
-
-    df_subset = df_subset[['Sample ID','Fator de diluição','Abs.','Concentração Final','Posição na Curva']]
 
     def convert_df(df_subset):
             output = io.BytesIO()
