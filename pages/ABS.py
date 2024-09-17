@@ -117,6 +117,8 @@ if abs_file:
     })
     st.table(styled_df)
 
+    df_subset = df_subset[['Sample ID','Fator de diluição','Abs.','Concentração Final','Posição na Curva']]
+
     def convert_df(df_subset):
             output = io.BytesIO()
             with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
