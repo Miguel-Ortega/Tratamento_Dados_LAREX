@@ -84,7 +84,7 @@ if abs_file:
     Amostra.loc[:,'Concentração Calc.'] = (Amostra['Abs.']-b)/a
 
     def extract_fator(sample_id):
-        match = pd.Series(sample_id).str.extract(r'([\d.,]+)([Kk]?)X', expand=True)
+        match = pd.Series(sample_id).str.extract(r'([\d.,]+)([KkXx]?)', expand=True)
         # Se houver 'K' ou 'k', multiplicar o valor extraído por 1000
         if match[1].str.contains('K|k', na=False).any():
             return float(match[0].str.replace(',', '.').iloc[0]) * 1000
