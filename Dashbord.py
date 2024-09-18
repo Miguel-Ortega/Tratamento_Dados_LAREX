@@ -23,5 +23,5 @@ with coluna2:
     st.write('Dúvidas ou sugestões entre em [contato!](mailto:Miguelorteg2001@gmail.com)')
     st.write('Este aplicativo foi feito por Miguel Ortega em seu tempo nem tão livre.')
 
-with coluna3:
+#with coluna3:
     #st.image(Minerva,width= 350)
