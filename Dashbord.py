@@ -5,6 +5,7 @@ import plotly.express as px
 from PIL import Image
 
 st.set_page_config(layout= 'wide',page_icon= 'jabuti-05.png', page_title= 'Facilitador')
+st.sidebar.title("Visão Geral")
 
 st.title('Tratamentos de Dados')
 
