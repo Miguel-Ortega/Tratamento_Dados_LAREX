@@ -19,7 +19,7 @@ abs_file = st.file_uploader(label = 'Selecione o arquivo txt com os dados do ABS
 coluna1,coluna2 = st.columns(2)
 
 if abs_file:
-    Dados = pd.read_csv(abs_file, delimiter='\t', skiprows=2, header=0)
+    Dados = pd.read_csv(abs_file, delimiter='\t', skiprows=2, header=0, encoding='utf-8')
 
     df_filtrado = Dados[Dados['Action'].str.endswith('AV')]
 
