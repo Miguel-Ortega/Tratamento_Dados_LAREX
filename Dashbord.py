@@ -9,7 +9,7 @@ st.set_page_config(layout= 'wide',page_icon= 'jabuti-05.png', page_title= 'Facil
 st.title('Tratamentos de Dados')
 
 Jabuti = Image.open('jabuti-05.png')
-Minerva = Image.open('Minerva.png')
+#Minerva = Image.open('Minerva.png')
 
 coluna1,coluna2,coluna3 = st.columns([250,250,250])
 
@@ -20,7 +20,7 @@ with coluna1:
 with coluna2:
     st.write('Olá!!, Seja muito bem vindo!')
     st.write('Ao lado esquerdo existe uma barra de seleção onde você encontrará todos os softwares que te ajudam a economizar um tempinho do seu dia!')
-    st.write('Podem aparecer algumas janelas de erro caso você ainda nao tenha subido os arquivos, apenas ignore!')
+    st.write('Dúvidas ou sugestões entre em [contato!](Miguelorteg2001@gmail.com)')
     st.write('Este aplicativo foi feito por Miguel Ortega em seu tempo nem tão livre.')
 
 with coluna3:
