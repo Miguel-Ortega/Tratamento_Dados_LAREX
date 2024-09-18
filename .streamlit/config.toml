@@ -1,8 +1,2 @@
-[server]
-headless = true
-port = $PORT
-enableCORS = false
-script = "Geral.py"
-
 [theme]
 base="dark"
