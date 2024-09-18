@@ -1,2 +1,6 @@
 [theme]
 base="dark"
+headless = true
+port = $PORT
+enableCORS = false
+script = "Geral.py"
