@@ -64,7 +64,7 @@ def tratar_dados():
 
         df_picos['Height(cps)'] = df_picos['Height(cps)'].round(-1)
         df_picos['2-theta(deg)'] = df_picos['2-theta(deg)'].round(0)
-        df_picos['Height(cps)'] += 50
+        df_picos['Height(cps)'] += 800
 
         # Adiciona 10 aos valores duplicados (exceto o primeiro), quando '2-theta(deg)' também é duplicado
         df_picos.loc[df_picos.duplicated(subset=['Height(cps)', '2-theta(deg)'], keep='first'), 'Height(cps)'] += 35
