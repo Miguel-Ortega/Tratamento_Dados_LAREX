@@ -62,9 +62,13 @@ def tratar_dados():
 
         df_picos_orginal = df_picos['2-theta(deg)'].copy()
 
+        Altura = df_dados.loc[df_dados['#twotheta'].isin(df_picos['2-theta(deg)']), ' yobs']
+        Altura = pd.DataFrame(Altura)
+        Altura = Altura.reset_index(drop=True)
+
         df_picos['Height(cps)'] = df_picos['Height(cps)'].round(-1)
         df_picos['2-theta(deg)'] = df_picos['2-theta(deg)'].round(0)
-        df_picos['Height(cps)'] += 800
+        df_picos['Height(cps)'] = Altura[' yobs'].copy() + 25
 
         # Adiciona 10 aos valores duplicados (exceto o primeiro), quando '2-theta(deg)' também é duplicado
         df_picos.loc[df_picos.duplicated(subset=['Height(cps)', '2-theta(deg)'], keep='first'), 'Height(cps)'] += 35
