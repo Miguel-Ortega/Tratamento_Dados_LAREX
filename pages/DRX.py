@@ -42,7 +42,7 @@ def tratar_dados():
         for index, row in df_picos.iterrows():
             graus = row['2-theta(deg)']
             nomes = row['Chemical formula'].split(',')
-            valor_original = row['Height(cps)']
+            valor_original = row['Height(cps)'] or row['Height(counts)']
 
             for i, nome in enumerate(nomes):
                 if i != 0:
