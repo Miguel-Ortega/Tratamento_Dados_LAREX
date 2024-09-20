@@ -62,7 +62,7 @@ def tratar_dados():
 
         df_picos_orginal = df_picos['2-theta(deg)'].copy()
 
-        Altura = df_dados.loc[df_dados['#twotheta'].isin(df_picos['2-theta(deg)'].round(1)), ' yobs']
+        Altura = df_dados.loc[df_dados['#twotheta'].round(1).isin(df_picos['2-theta(deg)'].round(1)), ' yobs']
         Altura = pd.DataFrame(Altura)
         Altura = Altura.reset_index(drop=True)
 
