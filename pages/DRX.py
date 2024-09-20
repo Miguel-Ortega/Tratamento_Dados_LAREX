@@ -36,6 +36,18 @@ def tratar_dados():
         df_picos = df_picos.replace(" ", np.nan)
         df_picos = df_picos.dropna(subset=['Chemical formula'])
 
+        Altura = df_dados.loc[df_dados['#twotheta'].isin(df_picos['2-theta(deg)'].round(1)), ' yobs']
+        Altura = pd.DataFrame(Altura)
+        Altura = Altura.reset_index(drop=True)
+        
+        df_picos['Height(cps)'] = df_picos['Height(cps)'].round(-1)
+        df_picos['2-theta(deg)'] = df_picos['2-theta(deg)'].round(0)
+        df_picos['Height(cps)'] = Altura[' yobs'].copy() + 50
+
+
+        df_picos['Height(cps)'] = df_picos['Height(cps)'].round(-1)
+        df_picos['2-theta(deg)'] = df_picos['2-theta(deg)'].round(0)
+        df_picos['Height(cps)'] = Altura[' yobs'].copy() + 50
 
         # Preparando dados para exibição de picos
         resultados = []
@@ -61,14 +73,6 @@ def tratar_dados():
         df_picos = pd.DataFrame(resultados)
 
         df_picos_orginal = df_picos['2-theta(deg)'].copy()
-
-        Altura = df_dados.loc[df_dados['#twotheta'].isin(df_picos['2-theta(deg)'].round(1)), ' yobs']
-        Altura = pd.DataFrame(Altura)
-        Altura = Altura.reset_index(drop=True)
-
-        df_picos['Height(cps)'] = df_picos['Height(cps)'].round(-1)
-        df_picos['2-theta(deg)'] = df_picos['2-theta(deg)'].round(0)
-        df_picos['Height(cps)'] = Altura[' yobs'].copy() + 50
 
         # Adiciona 10 aos valores duplicados (exceto o primeiro), quando '2-theta(deg)' também é duplicado
         df_picos.loc[df_picos.duplicated(subset=['Height(cps)', '2-theta(deg)'], keep='first'), 'Height(cps)'] += 35
