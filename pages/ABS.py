@@ -144,7 +144,7 @@ if abs_file:
         st.download_button(
             label="Baixar Resultados",
             data=Excel,
-            file_name='Resultados_ABS.xlsx',
+            file_name=f'Resultados_ABS_{abs_file.name.replace(".txt", "")}.xlsx',
             mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
         )
 
