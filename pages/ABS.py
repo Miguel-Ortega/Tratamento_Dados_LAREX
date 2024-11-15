@@ -23,12 +23,17 @@ if abs_file:
 
     df_filtrado = Dados[Dados['Action'].str.endswith('AV')]
 
-    Branco = df_filtrado.loc[df_filtrado["Action"] == 'BLK-AV' ]
     Padrao = df_filtrado.loc[df_filtrado["Action"] == 'STD-AV' ]
     Amostra = df_filtrado.loc[df_filtrado["Action"].str.startswith('UNK') ]
-
-    Amostra.loc[:, 'Abs.'] = (Amostra['Abs.']) - (Branco['Abs.'].iloc[0])
-    Padrao.loc[:, 'Abs.'] = (Padrao['Abs.']) - (Branco['Abs.'].iloc[0])
+    Branco = df_filtrado.loc[df_filtrado["Action"] == 'BLK-AV' ]
+    if Branco.empty:
+        st.error("Humm. Acho que você esqueceu de colocar o BLK.")
+        Branco = st.number_input("Insira o valor do branco:", min_value=0.0000, max_value=1.0000, value=0.0000, step=0.0001, format="%.4f")
+        Amostra.loc[:, 'Abs.'] = (Amostra['Abs.']) - Branco
+        Padrao.loc[:, 'Abs.'] = (Padrao['Abs.']) - Branco
+    else:
+        Amostra.loc[:, 'Abs.'] = (Amostra['Abs.']) - (Branco['Abs.'].iloc[0])
+        Padrao.loc[:, 'Abs.'] = (Padrao['Abs.']) - (Branco['Abs.'].iloc[0])
     
     x_original = Padrao['True Value (ppm)'].values
     y_original = Padrao['Abs.'].values
