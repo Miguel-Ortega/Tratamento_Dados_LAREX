@@ -27,7 +27,7 @@ if abs_file:
     Amostra = df_filtrado.loc[df_filtrado["Action"].str.startswith('UNK') ]
     Branco = df_filtrado.loc[df_filtrado["Action"] == 'BLK-AV' ]
     if Branco.empty:
-        st.error("Humm. Acho que você esqueceu de colocar o BLK.")
+        st.error("Humm. Acho que você esqueceu de colocar o BLk.")
         Branco = st.number_input("Insira o valor do branco:", min_value=0.0000, max_value=1.0000, value=0.0000, step=0.0001, format="%.4f")
         Amostra.loc[:, 'Abs.'] = (Amostra['Abs.']) - Branco
         Padrao.loc[:, 'Abs.'] = (Padrao['Abs.']) - Branco
