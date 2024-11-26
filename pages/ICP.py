@@ -240,9 +240,7 @@ if icp_file:
 
         # Realiza a multiplicação
         df_subset['Resultado'] = df_subset['Concentração'] * df_subset['Fator de diluição']
-        df_subset['Resultado'] = df_subset['Resultado'].round(2).astype(str)
-        unidade_de_medida = 'ppm' 
-        df_subset['Resultado'] += ' ' + unidade_de_medida
+        df_subset['Resultado (ppm)'] = df_subset['Resultado'].round(2).astype(str)
         df_subset['Int'] = FGX
         df_subset['Posição na Curva'] = PosiçãoNaCurva
         df_subset['Int'] = df_subset['Int'].round(2).astype(int)
