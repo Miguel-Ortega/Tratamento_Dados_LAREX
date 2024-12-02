@@ -144,7 +144,8 @@ if icp_file:
         PontoP['Int'] = (PontoP['Int']) - int(PontoB['Int'])
         PontoA['Int'] = (PontoA['Int']) - int(PontoB['Int'])
 
-        coluna1,coluna2 = st.columns(2)
+        coluna1,coluna2,coluna3 = st.columns([6,2,2])
+        
         x_original = PontoP['Soln Conc'].values
         y_original = PontoP['Int'].values
         selected_rows = []
@@ -183,6 +184,11 @@ if icp_file:
         valor_referencia = PontoP['Int'].min()
         FGX = PontoA['Int']
         valor_maximo = PontoP['Int'].max()
+
+        df_valores_ref = pd.DataFrame({'Máximo': valor_maximo, 'Minimo': valor_referencia}, index=[0])
+
+        with coluna3:
+            st.dataframe(df_valores_ref, hide_index=True)
 
 
         def highlight_row(row):
